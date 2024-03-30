@@ -1,0 +1,123 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.container-style {
+  margin-top: 30px;
+}
+
+.container-style h6 {
+  margin-bottom: 20px;
+  text-align: left
+}
+
+.container-style h4 {
+  margin-bottom: 20px;
+  text-align: center
+}
+
+.container-style div {
+  margin: 5px 0;
+}
+
+.container-style .button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container-style .button-container button {
+  width: 20%;
+  margin-bottom: 10px;
+}
+
+.container-style .sub-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container-style .sub-container h6 {
+  margin-bottom: 0;
+}
+
+.container-style .expense-button-container {
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.container-style .img-container {
+  gap: 30px;
+  justify-content: space-between;
+  display: flex;
+}
+
+.container-style .img-container div {
+  flex: 1 1 50%;
+}
+
+.container-style .img-container .left-container {
+  margin-top: 20%;
+}
+
+.container-style .home-button-container {
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container-style .home-button-container button {
+  width: 50%;
+}
+
+.container-style .form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.container-style .form-container form {
+  width: 50%;
+}
+
+.error {
+  text-emphasis-color: rgb(211, 47, 47);
+  color: rgb(211, 47, 47);
+}

@@ -1,0 +1,74 @@
+service: csci-5409-ruchika-term-assignment-B00885185-resources
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  region: us-east-1
+  runtime: nodejs18.x
+
+resources:
+  Description: "This stack contains the backend functions for cloud computing term assignment"
+  Resources:
+    # DynamoDB tables
+    UsersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: users_info
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+    ExpensesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: expenses
+        AttributeDefinitions:
+          - AttributeName: expenseId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: expenseId
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+    ExpenseQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: ExpenseQueue
+        VisibilityTimeout: 120
+
+    ExpenseQueuePolicy:
+      Type: AWS::SQS::QueuePolicy
+      Properties:
+        Queues:
+          - !Ref ExpenseQueue
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service: sns.amazonaws.com
+              Action:
+                - sqs:SendMessage
+              Resource: !GetAtt ExpenseQueue.Arn
+
+    ExpenseSNSTopic:
+      Type: AWS::SNS::Topic
+      Properties:
+        TopicName: ExpenseSNSTopic
+        DisplayName: ExpenseSNSTopic
+        Subscription:
+          - Endpoint: !GetAtt ExpenseQueue.Arn
+            Protocol: sqs
+
+    EmailExpenseSNSTopic:
+      Type: AWS::SNS::Topic
+      Properties:
+        TopicName: EmailExpenseSNSTopic
+        DisplayName: EmailExpenseSNSTopic
+        Subscription:
+          - Endpoint: ruchikanagpal1992@gmail.com
+            Protocol: email

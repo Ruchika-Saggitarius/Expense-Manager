@@ -1,0 +1,8 @@
+{
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/lalcebo/json-schema/master/serverless/reference.json": [
+            "file:///e%3A/DalhousieMACS/MACS_TERM_3/Cloud%20computing/ruchika/termassignment/backend/resources.yml",
+            "file:///e%3A/DalhousieMACS/MACS_TERM_3/Cloud%20computing/ruchika/termassignment/backend/lambdas.yml"
+        ]
+    }
+}

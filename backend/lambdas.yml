@@ -1,0 +1,89 @@
+service: csci-5409-ruchika-term-assignment-B00885185
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  region: us-east-1
+  runtime: nodejs18.x
+  iam:
+    role: arn:aws:iam::${env:AWS_ACCOUNT_ID}:role/LabRole
+  httpApi:
+    cors: true
+    payload: "2.0"
+    disableDefaultEndpoint: false
+
+package:
+  individually: true
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    httpPort: 4000
+
+functions:
+  create-expense:
+    handler: apis/expense/create-expense.handler
+    events:
+      - httpApi:
+          path: /expense/create-expense
+          method: post
+
+  delete-expense:
+    handler: apis/expense/delete-expense.handler
+    events:
+      - httpApi:
+          path: /expense/delete-expense
+          method: post
+
+  update-expense:
+    handler: apis/expense/update-expense.handler
+    events:
+      - httpApi:
+          path: /expense/update-expense
+          method: put
+
+  get-expenses:
+    handler: apis/expense/get-expenses.handler
+    events:
+      - httpApi:
+          path: /expense/get-expenses
+          method: get
+
+  get-balance:
+    handler: apis/expense/get-balance.handler
+    events:
+      - httpApi:
+          path: /expense/get-balance
+          method: get
+
+  register-user:
+    handler: apis/user/register-user.handler
+    events:
+      - httpApi:
+          path: /user/register-user
+          method: post
+
+  login-user:
+    handler: apis/user/login-user.handler
+    events:
+      - httpApi:
+          path: /user/login-user
+          method: post
+
+  reset-password:
+    handler: apis/user/reset-password.handler
+    events:
+      - httpApi:
+          path: /user/reset-password
+          method: post
+
+  send-expense-email:
+    name: send-expense-email
+    handler: apis/lambda/send-expense-email.handler
+    events:
+      - sqs:
+          arn: arn:aws:sqs:${self:provider.region}:${env:AWS_ACCOUNT_ID}:ExpenseQueue
+          maximumBatchingWindow: 1
+          enabled: true
